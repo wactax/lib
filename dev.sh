@@ -4,6 +4,10 @@ DIR=$(realpath $0) && DIR=${DIR%/*}
 cd $DIR
 set -ex
 
+if [ ! -d "node_modules" ]; then
+  yarn install
+fi
+
 export RUSTFLAGS='--cfg reqwest_unstable'
 export RUST_LOG=$RUST_LOG,watchexec=off,watchexec_cli=off,globset=warn
 
