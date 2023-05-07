@@ -1,3 +1,3 @@
-# `@w5/svg2webp-android-arm-eabi`
+# `@w5/lib-android-arm-eabi`
 
-This is the **armv7-linux-androideabi** binary for `@w5/svg2webp`
+This is the **armv7-linux-androideabi** binary for `@w5/lib`

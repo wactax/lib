@@ -1,11 +1,11 @@
 {
-  "name": "@w5/svg2webp",
+  "name": "@w5/lib",
   "version": "0.0.9",
   "main": "index.js",
   "types": "index.d.ts",
-  "homepage": "https://github.com/wactax/svg2webp.git",
+  "homepage": "https://github.com/wactax/lib.git",
   "napi": {
-    "name": "svg2webp",
+    "name": "lib",
     "triples": {
       "additional": [
         "aarch64-apple-darwin",
@@ -28,7 +28,6 @@
     "@w5/loader": "^0.0.3",
     "@w5/mdt": "^0.0.16",
     "@w5/uridir": "^0.0.1",
-    "@w5/write": "^0.0.1",
     "ava": "^5.1.1",
     "coffeescript": "^2.7.0",
     "concurrently": "^8.0.1",

@@ -5,7 +5,7 @@
 ## Install
 
 ```
-pnpm i -g @w5/svg2webp
+pnpm i -g @w5/lib
 ```
 
 ## Test

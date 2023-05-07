@@ -1,6 +1,6 @@
 [package]
 edition = "2021"
-name = "w5_svg2webp"
+name = "w5_lib"
 version = "0.0.0"
 
 [lib]
@@ -15,11 +15,6 @@ napi = { version = "2.12.0", default-features = false, features = [
   "error_anyhow"
 ] }
 napi-derive = "2.12.2"
-resvg = "0.32.0"
-thiserror = "1.0.40"
-tiny-skia = "0.9.0"
-usvg = "0.32.0"
-webp = "0.2.2"
 
 [build-dependencies]
 napi-build = "2.0.1"

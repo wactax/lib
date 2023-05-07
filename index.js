@@ -32,24 +32,24 @@ switch (platform) {
   case 'android':
     switch (arch) {
       case 'arm64':
-        localFileExisted = existsSync(join(__dirname, 'svg2webp.android-arm64.node'))
+        localFileExisted = existsSync(join(__dirname, 'lib.android-arm64.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./svg2webp.android-arm64.node')
+            nativeBinding = require('./lib.android-arm64.node')
           } else {
-            nativeBinding = require('@w5/svg2webp-android-arm64')
+            nativeBinding = require('@w5/lib-android-arm64')
           }
         } catch (e) {
           loadError = e
         }
         break
       case 'arm':
-        localFileExisted = existsSync(join(__dirname, 'svg2webp.android-arm-eabi.node'))
+        localFileExisted = existsSync(join(__dirname, 'lib.android-arm-eabi.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./svg2webp.android-arm-eabi.node')
+            nativeBinding = require('./lib.android-arm-eabi.node')
           } else {
-            nativeBinding = require('@w5/svg2webp-android-arm-eabi')
+            nativeBinding = require('@w5/lib-android-arm-eabi')
           }
         } catch (e) {
           loadError = e
@@ -63,13 +63,13 @@ switch (platform) {
     switch (arch) {
       case 'x64':
         localFileExisted = existsSync(
-          join(__dirname, 'svg2webp.win32-x64-msvc.node')
+          join(__dirname, 'lib.win32-x64-msvc.node')
         )
         try {
           if (localFileExisted) {
-            nativeBinding = require('./svg2webp.win32-x64-msvc.node')
+            nativeBinding = require('./lib.win32-x64-msvc.node')
           } else {
-            nativeBinding = require('@w5/svg2webp-win32-x64-msvc')
+            nativeBinding = require('@w5/lib-win32-x64-msvc')
           }
         } catch (e) {
           loadError = e
@@ -77,13 +77,13 @@ switch (platform) {
         break
       case 'ia32':
         localFileExisted = existsSync(
-          join(__dirname, 'svg2webp.win32-ia32-msvc.node')
+          join(__dirname, 'lib.win32-ia32-msvc.node')
         )
         try {
           if (localFileExisted) {
-            nativeBinding = require('./svg2webp.win32-ia32-msvc.node')
+            nativeBinding = require('./lib.win32-ia32-msvc.node')
           } else {
-            nativeBinding = require('@w5/svg2webp-win32-ia32-msvc')
+            nativeBinding = require('@w5/lib-win32-ia32-msvc')
           }
         } catch (e) {
           loadError = e
@@ -91,13 +91,13 @@ switch (platform) {
         break
       case 'arm64':
         localFileExisted = existsSync(
-          join(__dirname, 'svg2webp.win32-arm64-msvc.node')
+          join(__dirname, 'lib.win32-arm64-msvc.node')
         )
         try {
           if (localFileExisted) {
-            nativeBinding = require('./svg2webp.win32-arm64-msvc.node')
+            nativeBinding = require('./lib.win32-arm64-msvc.node')
           } else {
-            nativeBinding = require('@w5/svg2webp-win32-arm64-msvc')
+            nativeBinding = require('@w5/lib-win32-arm64-msvc')
           }
         } catch (e) {
           loadError = e
@@ -108,23 +108,23 @@ switch (platform) {
     }
     break
   case 'darwin':
-    localFileExisted = existsSync(join(__dirname, 'svg2webp.darwin-universal.node'))
+    localFileExisted = existsSync(join(__dirname, 'lib.darwin-universal.node'))
     try {
       if (localFileExisted) {
-        nativeBinding = require('./svg2webp.darwin-universal.node')
+        nativeBinding = require('./lib.darwin-universal.node')
       } else {
-        nativeBinding = require('@w5/svg2webp-darwin-universal')
+        nativeBinding = require('@w5/lib-darwin-universal')
       }
       break
     } catch {}
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(join(__dirname, 'svg2webp.darwin-x64.node'))
+        localFileExisted = existsSync(join(__dirname, 'lib.darwin-x64.node'))
         try {
           if (localFileExisted) {
-            nativeBinding = require('./svg2webp.darwin-x64.node')
+            nativeBinding = require('./lib.darwin-x64.node')
           } else {
-            nativeBinding = require('@w5/svg2webp-darwin-x64')
+            nativeBinding = require('@w5/lib-darwin-x64')
           }
         } catch (e) {
           loadError = e
@@ -132,13 +132,13 @@ switch (platform) {
         break
       case 'arm64':
         localFileExisted = existsSync(
-          join(__dirname, 'svg2webp.darwin-arm64.node')
+          join(__dirname, 'lib.darwin-arm64.node')
         )
         try {
           if (localFileExisted) {
-            nativeBinding = require('./svg2webp.darwin-arm64.node')
+            nativeBinding = require('./lib.darwin-arm64.node')
           } else {
-            nativeBinding = require('@w5/svg2webp-darwin-arm64')
+            nativeBinding = require('@w5/lib-darwin-arm64')
           }
         } catch (e) {
           loadError = e
@@ -152,12 +152,12 @@ switch (platform) {
     if (arch !== 'x64') {
       throw new Error(`Unsupported architecture on FreeBSD: ${arch}`)
     }
-    localFileExisted = existsSync(join(__dirname, 'svg2webp.freebsd-x64.node'))
+    localFileExisted = existsSync(join(__dirname, 'lib.freebsd-x64.node'))
     try {
       if (localFileExisted) {
-        nativeBinding = require('./svg2webp.freebsd-x64.node')
+        nativeBinding = require('./lib.freebsd-x64.node')
       } else {
-        nativeBinding = require('@w5/svg2webp-freebsd-x64')
+        nativeBinding = require('@w5/lib-freebsd-x64')
       }
     } catch (e) {
       loadError = e
@@ -168,26 +168,26 @@ switch (platform) {
       case 'x64':
         if (isMusl()) {
           localFileExisted = existsSync(
-            join(__dirname, 'svg2webp.linux-x64-musl.node')
+            join(__dirname, 'lib.linux-x64-musl.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./svg2webp.linux-x64-musl.node')
+              nativeBinding = require('./lib.linux-x64-musl.node')
             } else {
-              nativeBinding = require('@w5/svg2webp-linux-x64-musl')
+              nativeBinding = require('@w5/lib-linux-x64-musl')
             }
           } catch (e) {
             loadError = e
           }
         } else {
           localFileExisted = existsSync(
-            join(__dirname, 'svg2webp.linux-x64-gnu.node')
+            join(__dirname, 'lib.linux-x64-gnu.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./svg2webp.linux-x64-gnu.node')
+              nativeBinding = require('./lib.linux-x64-gnu.node')
             } else {
-              nativeBinding = require('@w5/svg2webp-linux-x64-gnu')
+              nativeBinding = require('@w5/lib-linux-x64-gnu')
             }
           } catch (e) {
             loadError = e
@@ -197,26 +197,26 @@ switch (platform) {
       case 'arm64':
         if (isMusl()) {
           localFileExisted = existsSync(
-            join(__dirname, 'svg2webp.linux-arm64-musl.node')
+            join(__dirname, 'lib.linux-arm64-musl.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./svg2webp.linux-arm64-musl.node')
+              nativeBinding = require('./lib.linux-arm64-musl.node')
             } else {
-              nativeBinding = require('@w5/svg2webp-linux-arm64-musl')
+              nativeBinding = require('@w5/lib-linux-arm64-musl')
             }
           } catch (e) {
             loadError = e
           }
         } else {
           localFileExisted = existsSync(
-            join(__dirname, 'svg2webp.linux-arm64-gnu.node')
+            join(__dirname, 'lib.linux-arm64-gnu.node')
           )
           try {
             if (localFileExisted) {
-              nativeBinding = require('./svg2webp.linux-arm64-gnu.node')
+              nativeBinding = require('./lib.linux-arm64-gnu.node')
             } else {
-              nativeBinding = require('@w5/svg2webp-linux-arm64-gnu')
+              nativeBinding = require('@w5/lib-linux-arm64-gnu')
             }
           } catch (e) {
             loadError = e
@@ -225,13 +225,13 @@ switch (platform) {
         break
       case 'arm':
         localFileExisted = existsSync(
-          join(__dirname, 'svg2webp.linux-arm-gnueabihf.node')
+          join(__dirname, 'lib.linux-arm-gnueabihf.node')
         )
         try {
           if (localFileExisted) {
-            nativeBinding = require('./svg2webp.linux-arm-gnueabihf.node')
+            nativeBinding = require('./lib.linux-arm-gnueabihf.node')
           } else {
-            nativeBinding = require('@w5/svg2webp-linux-arm-gnueabihf')
+            nativeBinding = require('@w5/lib-linux-arm-gnueabihf')
           }
         } catch (e) {
           loadError = e

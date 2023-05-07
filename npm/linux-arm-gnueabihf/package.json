@@ -1,5 +1,5 @@
 {
-  "name": "@w5/svg2webp-linux-arm-gnueabihf",
+  "name": "@w5/lib-linux-arm-gnueabihf",
   "version": "0.0.0",
   "os": [
     "linux"
@@ -7,9 +7,9 @@
   "cpu": [
     "arm"
   ],
-  "main": "svg2webp.linux-arm-gnueabihf.node",
+  "main": "lib.linux-arm-gnueabihf.node",
   "files": [
-    "svg2webp.linux-arm-gnueabihf.node"
+    "lib.linux-arm-gnueabihf.node"
   ],
   "license": "MIT",
   "engines": {

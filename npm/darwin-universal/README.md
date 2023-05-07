@@ -1,3 +1,3 @@
-# `@w5/svg2webp-darwin-universal`
+# `@w5/lib-darwin-universal`
 
-This is the **universal-apple-darwin** binary for `@w5/svg2webp`
+This is the **universal-apple-darwin** binary for `@w5/lib`
