@@ -12,6 +12,15 @@ pub fn zip_u64(li: Vec<JsNumber>) -> Result<Buffer> {
   }
   Ok(vbyte::compress_list(&u64_li).into())
 }
+
+#[napi]
+pub fn unzip_u64(bin: Buffer) -> Vec<i64> {
+  match vbyte::decompress_list(&bin) {
+    Ok(r) => r.into_iter().map(|i| i as i64).collect(),
+    Err(_) => vec![],
+  }
+}
+
 // use image::EncodableLayout;
 // use thiserror::Error;
 // use tiny_skia::PremultipliedColorU8;

@@ -1,7 +1,7 @@
 #!/usr/bin/env -S node --loader=@w5/jsext --trace-uncaught --expose-gc --unhandled-rejections=strict --experimental-import-meta-resolve
-var T;
+var T, li;
 
-import index from '../index.js';
+import I from '../index.js';
 
 import avat from '@w5/avat';
 
@@ -14,6 +14,12 @@ import uridir from '@w5/uridir';
 
 import util from 'util';
 
-T = avat(index);
+T = avat(I);
 
-T.zipU64(1, 2, 3, 4)(Buffer.from([1, 2, 3, 4]));
+li = [1, 2, 3, 4];
+
+T.zipU64(...li)(Buffer.from(li));
+
+li.push(54321);
+
+T.unzipU64(I.zipU64(...li))(li);

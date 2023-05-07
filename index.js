@@ -252,7 +252,8 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { zipU64 } = nativeBinding
+const { zipU64, unzipU64 } = nativeBinding
 
-module.exports.zipU64 = zipU64;
+module.exports.zipU64 = zipU64
+module.exports.unzipU64 = unzipU64;
 module.exports.zipU64 = (...args) => zipU64(args);
