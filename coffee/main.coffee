@@ -4,6 +4,7 @@
   ava:test
   path > join dirname
   @w5/uridir
+  util
 
 T = new Proxy(
   {}
@@ -17,9 +18,9 @@ T = new Proxy(
             r = func(...args)
             if r instanceof Promise
               name = 'await '+name
-            console.log '    '+name+'(', args.map(
+            console.log '`'+name+'(', args.map(
               (i)=>JSON.stringify i
-            ).join(','), ')', '=',result
+            ).join(','), ')`', ' → `'+util.format(result)+'`\n'
             if r instanceof Promise
               r = await r
             t.deepEqual(

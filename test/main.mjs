@@ -12,6 +12,8 @@ import {
 
 import uridir from '@w5/uridir';
 
+import util from 'util';
+
 T = new Proxy({}, {
   get: (_, name) => {
     var func;
@@ -24,9 +26,9 @@ T = new Proxy({}, {
           if (r instanceof Promise) {
             name = 'await ' + name;
           }
-          console.log('    ' + name + '(', args.map((i) => {
+          console.log('`' + name + '(', args.map((i) => {
             return JSON.stringify(i);
-          }).join(','), ')', '=', result);
+          }).join(','), ')`', ' → `' + util.format(result) + '`\n');
           if (r instanceof Promise) {
             r = (await r);
           }
