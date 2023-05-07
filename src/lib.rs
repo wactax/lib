@@ -1,7 +1,4 @@
-use napi::{
-  bindgen_prelude::{AsyncTask, Buffer},
-  Env, JsNumber, Result, Task,
-};
+use napi::{bindgen_prelude::Buffer, JsNumber, Result};
 
 #[macro_use]
 extern crate napi_derive;
