@@ -254,4 +254,5 @@ if (!nativeBinding) {
 
 const { zipU64 } = nativeBinding
 
-module.exports.zipU64 = zipU64
+module.exports.zipU64 = zipU64;
+module.exports.zipU64 = (...args) => zipU64(args);
