@@ -1,9 +1,7 @@
 #!/usr/bin/env -S node --loader=@w5/jsext --trace-uncaught --expose-gc --unhandled-rejections=strict --experimental-import-meta-resolve
-var ROOT;
+var T;
 
-import {
-  svgWebp
-} from '../index.js';
+import index from '../index.js';
 
 import test from 'ava';
 
@@ -14,17 +12,31 @@ import {
 
 import uridir from '@w5/uridir';
 
-import write from '@w5/write';
+import util from 'util';
 
-import {
-  readFileSync
-} from 'fs';
-
-ROOT = dirname(uridir(import.meta));
-
-test('svg → webp', async(t) => {
-  var r;
-  r = (await svgWebp(readFileSync(join(ROOT, 'logo.svg')), 80));
-  write(join(ROOT, 'logo.webp'), r);
-  t.true(r instanceof Buffer);
+T = new Proxy({}, {
+  get: (_, name) => {
+    var func;
+    func = index[name];
+    return (...args) => {
+      return (result) => {
+        return test(name, async(t) => {
+          var r;
+          r = func(...args);
+          if (r instanceof Promise) {
+            name = 'await ' + name;
+          }
+          console.log('`' + name + '(', args.map((i) => {
+            return JSON.stringify(i);
+          }).join(','), ')`', ' → `' + util.format(result) + '`\n');
+          if (r instanceof Promise) {
+            r = (await r);
+          }
+          t.deepEqual(r, result);
+        });
+      };
+    };
+  }
 });
+
+T.zipU64(1, 2, 3, 4)(Buffer.from([1, 2, 3, 4]));

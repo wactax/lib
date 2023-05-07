@@ -254,9 +254,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5/svg2webp@workspace:.":
+"@w5/lib@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@w5/svg2webp@workspace:."
+  resolution: "@w5/lib@workspace:."
   dependencies:
     "@napi-rs/cli": ^2.15.2
     "@w5/coffee_plus": ^0.0.13

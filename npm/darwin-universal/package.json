@@ -1,12 +1,12 @@
 {
-  "name": "@w5/svg2webp-darwin-universal",
+  "name": "@w5/lib-darwin-universal",
   "version": "0.0.0",
   "os": [
     "darwin"
   ],
-  "main": "svg2webp.darwin-universal.node",
+  "main": "lib.darwin-universal.node",
   "files": [
-    "svg2webp.darwin-universal.node"
+    "lib.darwin-universal.node"
   ],
   "license": "MIT",
   "engines": {

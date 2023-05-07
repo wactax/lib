@@ -1,5 +1,2 @@
+`zipU64( 1,2,3,4 )`  → `<Buffer 01 02 03 04>`
 
-  ✔ svg → webp (893ms)
-  ─
-
-  1 test passed

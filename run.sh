@@ -5,4 +5,4 @@ cd $DIR
 set -ex
 
 yarn run build:debug
-RUST_BACKTRACE=short exec ${1:-yarn test} | tee out.txt
+RUST_BACKTRACE=short exec ${1:-yarn test} 2>out.txt
