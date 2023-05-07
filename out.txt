@@ -1,18 +1,5 @@
 
-  [1mUncaught exception in test/main.mjs[22m
-
-  [90mtest/main.mjs:22[39m
-
-   [90m21:[39m       ({name} = func);               
-  [41m[1m 22:       return test(name, async(t) => {[22m[49m
-   [90m23:[39m         var r;                       
-
-  TypeError: Tests must have a title
-
-  [90m› file://test/main.mjs:22:14[39m
-  [90m› file://test/main.mjs:40:25[39m
-
-  [31m✘ test/main.mjs exited with a non-zero exit code: 1[39m
+  [32m✔[39m zipU64
   [90m─[39m
 
-  [31m1 uncaught exception[39m
+  [32m1 test passed[39m
