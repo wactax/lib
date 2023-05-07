@@ -15,42 +15,25 @@ pnpm i -g @w5/lib
 ```coffee
 #!/usr/bin/env coffee
 
-> ../index.js
-  ava:test
+> ../index.js:I
+  @w5/avat
   path > join dirname
   @w5/uridir
   util
 
-T = new Proxy(
-  {}
-  get:(_,name)=>
-    func = index[name]
-    (args...)=>
-      (result)=>
-        test(
-          name
-          (t)=>
-            r = func(...args)
-            if r instanceof Promise
-              name = 'await '+name
-            console.log '`'+name+'(', args.map(
-              (i)=>JSON.stringify i
-            ).join(','), ')`', ' → `'+util.format(result)+'`\n'
-            if r instanceof Promise
-              r = await r
-            t.deepEqual(
-              r
-              result
-            )
-            return
-        )
-)
+T = avat I
 
-T.zipU64(1,2,3,4)(
-  Buffer.from [1,2,3,4]
-)
+li = [1,2,3,4]
+
+T.zipU64(...li)(Buffer.from li)
+
+li.push 54321
+
+T.unzipU64(I.zipU64(...li))(li)
 ```
 
 output :
 
 `zipU64( 1,2,3,4 )`  → `<Buffer 01 02 03 04>`
+
+`unzipU64( <Buffer 01 02 03 04 b1 a8 03> )`  → `[ 1, 2, 3, 4, 54321 ]`
