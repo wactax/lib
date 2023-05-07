@@ -1,0 +1,5 @@
+
+  ✔ svg → webp (893ms)
+  ─
+
+  1 test passed
