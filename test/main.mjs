@@ -16,8 +16,21 @@ import uridir from '@w5/uridir';
 
 Eq = (func, ...args) => {
   return (result) => {
-    return test(func.name, async(t) => {
-      return t.deepEqual((await func(...args)), result);
+    var name;
+    ({name} = func);
+    return test(name, async(t) => {
+      var r;
+      r = func(...args);
+      if (r instanceof Promise) {
+        name = 'await ' + name;
+      }
+      console.log('    ' + name + '(', args.map((i) => {
+        return JSON.stringify(i);
+      }).join(','), ')', '=', result);
+      if (r instanceof Promise) {
+        r = (await r);
+      }
+      t.deepEqual(r, result);
     });
   };
 };

@@ -7,13 +7,23 @@
 
 Eq = (func, args...)=>
   (result)=>
+    {name} = func
     test(
-      func.name
+      name
       (t)=>
+        r = func(...args)
+        if r instanceof Promise
+          name = 'await '+name
+        console.log '    '+name+'(', args.map(
+          (i)=>JSON.stringify i
+        ).join(','), ')', '=',result
+        if r instanceof Promise
+          r = await r
         t.deepEqual(
-          await func(...args)
+          r
           result
         )
+        return
 
     )
 
