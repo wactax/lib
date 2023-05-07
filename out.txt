@@ -1,11 +1,5 @@
 
-  [1mUncaught exception in test/main.mjs[22m
-
-  Error: Module did not self-register: '/Users/z/git/lib/lib.darwin-arm64.node'.
-
-  [90m› Object.<anonymous> (index.js:139:29)[39m
-
-  [31m✘ test/main.mjs exited with a non-zero exit code: 1[39m
+  [32m✔[39m zipU64
   [90m─[39m
 
-  [31m1 uncaught exception[39m
+  [32m1 test passed[39m

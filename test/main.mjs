@@ -1,6 +1,6 @@
   //!/usr/bin/env coffee
 import {
-  svgWebp
+  zipU64
 } from '../index.js';
 
 import test from 'ava';
@@ -12,6 +12,6 @@ import {
 
 import uridir from '@w5/uridir';
 
-test('test', (t) => {
-  t.pass();
+test('zipU64', (t) => {
+  t.deepEqual(zipU64([1, 2, 3, 4]), Buffer.from([1, 2, 3, 4]));
 });

@@ -1,10 +1,21 @@
+use napi::{
+  bindgen_prelude::{AsyncTask, Buffer},
+  Env, JsNumber, Result, Task,
+};
+
 #[macro_use]
 extern crate napi_derive;
+
+#[napi]
+pub fn zip_u64(li: Vec<JsNumber>) -> Result<Buffer> {
+  let mut u64_li = vec![];
+  for i in li {
+    let i: i64 = i.try_into()?;
+    u64_li.push(i as u64);
+  }
+  Ok(vbyte::compress_list(&u64_li).into())
+}
 // use image::EncodableLayout;
-// use napi::{
-//   bindgen_prelude::{AsyncTask, Buffer},
-//   Env, Result, Task,
-// };
 // use thiserror::Error;
 // use tiny_skia::PremultipliedColorU8;
 // use usvg::TreeParsing;

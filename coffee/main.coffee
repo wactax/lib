@@ -1,13 +1,16 @@
 #!/usr/bin/env coffee
 
-> ../index.js > svgWebp
+> ../index.js > zipU64
   ava:test
   path > join dirname
   @w5/uridir
 
 test(
-  'test'
+  'zipU64'
   (t) =>
-    t.pass()
+    t.deepEqual(
+      zipU64([1,2,3,4]),
+      Buffer.from [1,2,3,4]
+    )
     return
 )

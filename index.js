@@ -252,6 +252,6 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { svgWebp } = nativeBinding
+const { zipU64 } = nativeBinding
 
-module.exports.svgWebp = svgWebp
+module.exports.zipU64 = zipU64
