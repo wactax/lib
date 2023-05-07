@@ -30,6 +30,7 @@
     "@w5/uridir": "^0.0.1",
     "ava": "^5.1.1",
     "coffeescript": "^2.7.0",
+    "@w5/avat": "^0.0.1",
     "concurrently": "^8.0.1",
     "zx": "^7.2.2"
   },
@@ -48,5 +49,6 @@
     "universal": "napi universal",
     "version": "napi version"
   },
-  "packageManager": "yarn@3.5.1"
+  "packageManager": "yarn@3.5.1",
+  "dependencies": {}
 }
