@@ -5,12 +5,23 @@
   path > join dirname
   @w5/uridir
 
-test(
-  'zipU64'
-  (t) =>
-    t.deepEqual(
-      zipU64([1,2,3,4]),
-      Buffer.from [1,2,3,4]
+Eq = (func, args...)=>
+  (result)=>
+    test(
+      func.name
+      (t)=>
+        t.deepEqual(
+          await func(...args)
+          result
+        )
+
     )
-    return
+
+
+Eq(
+  zipU64
+  [1,2,3,4]
+)(
+  Buffer.from [1,2,3,4]
 )
+
