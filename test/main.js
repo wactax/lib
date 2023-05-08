@@ -1,5 +1,5 @@
 #!/usr/bin/env -S node --loader=@w5/jsext --trace-uncaught --expose-gc --unhandled-rejections=strict --experimental-import-meta-resolve
-var I, T, bin, li, n;
+var I, T, bin, li, n, s;
 
 import avat from '@w5/avat';
 
@@ -15,6 +15,14 @@ import util from 'util';
 I = (await import('../index.js'));
 
 T = avat(I);
+
+bin = Buffer.from('2323233165', 'hex');
+
+s = 'c';
+
+T.z85Dump(s)(bin);
+
+T.z85Load(bin)(Buffer.from(s, 'utf8'));
 
 li = [1, 2, 3, 4];
 

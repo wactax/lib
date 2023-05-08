@@ -9,6 +9,16 @@ use ordered_varint::Variable;
 extern crate napi_derive;
 
 #[napi]
+pub fn z85_dump(bin: Buffer) -> Buffer {
+  z85::encode(bin).into()
+}
+
+#[napi]
+pub fn z85_load(bin: Buffer) -> Result<Buffer> {
+  Ok(z85::decode(bin)?.into())
+}
+
+#[napi]
 pub fn u64_bin(n: JsNumber) -> Result<Buffer> {
   let n: i64 = n.try_into()?;
   let n = n as u64;
