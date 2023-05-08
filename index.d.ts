@@ -7,7 +7,7 @@ export function cookieDecode(s: string): Buffer
 export function cookieEncode(li: Buffer): string
 export function xxh64(li: Buffer): Buffer
 export function xxh32(li: Buffer): Buffer
-export function xxh3B36(li: Buffer): Buffer
+export function xxh3B36(li: Buffer): string
 export function ipBin(ip: string): Buffer
 export function tld(domain: Buffer): string
 export function randomBytes(n: number): Buffer
