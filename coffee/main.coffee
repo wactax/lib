@@ -1,12 +1,12 @@
 #!/usr/bin/env coffee
 
-> ../index.js:I
-  @w5/avat
+
+> @w5/avat
   path > join dirname
   @w5/uridir
   util
 
-T = avat I
+T = avat await import('../index.js')
 
 li = [1,2,3,4]
 

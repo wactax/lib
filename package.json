@@ -35,10 +35,14 @@
     "ava": "^5.2.0",
     "coffeescript": "^2.7.0",
     "concurrently": "^8.0.1",
+    "esm": "^3.2.25",
     "zx": "^7.2.2"
   },
   "ava": {
-    "timeout": "3m"
+    "timeout": "3m",
+    "require": [
+      "esm"
+    ]
   },
   "engines": {
     "node": ">= 10"
