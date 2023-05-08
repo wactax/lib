@@ -172,12 +172,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5/avat@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@w5/avat@npm:0.0.1"
+"@w5/avat@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "@w5/avat@npm:0.0.2"
   dependencies:
     ava: ^5.2.0
-  checksum: 9468afc25051e7dce8f8b5878656e88ad62594b026185cc70e6e4eadb897a3fe9c3b86041d28d68cb99b8478b1daa9c04c5eb36f0a204010f8620afd33c1182c
+  checksum: d3ddb4750b25fa90b3cc0ef4b99ecf96b1999b237fce0661a6588b742fe3476a11f0e489de8f170315bf0c13184d9be5e4115b72602ba6f820773b1d8331fede
   languageName: node
   linkType: hard
 
@@ -234,12 +234,14 @@ __metadata:
   resolution: "@w5/lib@workspace:."
   dependencies:
     "@napi-rs/cli": ^2.15.2
-    "@w5/avat": ^0.0.1
+    "@w5/avat": ^0.0.2
     "@w5/coffee_plus": ^0.0.13
     "@w5/loader": ^0.0.3
     "@w5/mdt": ^0.0.16
+    "@w5/read": ^0.0.1
     "@w5/uridir": ^0.0.1
-    ava: ^5.1.1
+    "@w5/write": ^0.0.1
+    ava: ^5.2.0
     coffeescript: ^2.7.0
     concurrently: ^8.0.1
     zx: ^7.2.2
@@ -474,7 +476,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ava@npm:^5.1.1, ava@npm:^5.2.0":
+"ava@npm:^5.2.0":
   version: 5.2.0
   resolution: "ava@npm:5.2.0"
   dependencies:
