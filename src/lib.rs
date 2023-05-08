@@ -1,12 +1,17 @@
+use std::hash::{BuildHasher, Hasher};
+
 use anyhow::Result;
 use napi::{
   bindgen_prelude::{AsyncTask, Buffer},
   Env, JsNumber, Task,
 };
 use ordered_varint::Variable;
+use xxhash_rust::xxh3::Xxh3Builder;
 
 #[macro_use]
 extern crate napi_derive;
+
+const XXHASHER: Xxh3Builder = Xxh3Builder::new();
 
 const COOKIE_SAFE_CHAR: &str =
   "!#$%&'()*+-./0123456789:<>?@ABDEFGHIJKLMNQRSTUVXYZ[]^_`abdefghijklmnqrstuvxyz{|}~";
@@ -20,6 +25,87 @@ pub fn cookie_decode(s: String) -> Result<Buffer> {
 pub fn cookie_encode(li: Buffer) -> String {
   base_x::encode(COOKIE_SAFE_CHAR, &li)
 }
+
+#[napi]
+pub fn xxh64(li: Buffer) -> Buffer {
+  let mut h64 = XXHASHER.build_hasher();
+  h64.update(&li);
+  h64.finish().to_le_bytes().into()
+}
+
+// xxh64 |cx| {
+//   let li = args_bin_li(cx,0)?;
+//   let mut h64 = XXHASHER.build_hasher();
+//   for i in li {
+//     h64.update(i.as_ref());
+//   }
+//   h64.finish().to_le_bytes()
+// }
+//
+// xxh32 |cx| {
+//   let li = args_bin_li(cx,0)?;
+//   let mut h = Xxh32::new(0);
+//   for i in li {
+//     h.update(i.as_ref());
+//   }
+//   h.digest().to_le_bytes()
+// }
+//
+// xxh3_b36 |cx| {
+//   let li = args_bin_li(cx,0)?;
+//   let mut h64 = XXHASHER.build_hasher();
+//   for i in li {
+//     h64.update(i.as_ref());
+//   }
+//   let r = h64.finish().to_le_bytes();
+//   let mut n = 0;
+//   while n < 6 {
+//     if r[n]!=0 {
+//       break;
+//     }
+//     n+=1;
+//   }
+//   base_x::encode("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz",&r[n..])
+// }
+//
+// ip_bin |cx| {
+//   let ip = as_str(cx,0)?;
+//   let ip:IpAddr = ok!(cx,ip.parse());
+//   match ip{
+//     IpAddr::V4(ip) => {
+//       let o = ip.octets();
+//       Box::<[u8]>::from([o[0], o[1], o[2], o[3]])
+//     }
+//     IpAddr::V6(ip) => {
+//       let o = ip.octets();
+//       Box::<[u8]>::from([
+//         o[0], o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8], o[9], o[10], o[11], o[12], o[13],
+//         o[14], o[15],
+//       ])
+//     }
+//   }
+// }
+//
+// tld |cx| {
+//   let mut domain = &to_bin(cx, 0)?[..];
+//   if let Some(d) = psl::domain(domain){
+//     let bytes = d.suffix().as_bytes();
+//     let len = bytes.len();
+//     if len > 0 && !is_ascii_digit(bytes) {
+//       let mut n = domain.len()-len;
+//       n = n.saturating_sub(1);
+//       while n > 0 {
+//         let t=n-1;
+//         if domain[t] == b'.' {
+//           break;
+//         }
+//         n=t;
+//       }
+//       domain = &domain[n..]
+//     }
+//   }
+//   unsafe { String::from_utf8_unchecked(domain.into()) }
+// }
 
 #[napi]
 pub fn random_bytes(n: u32) -> Buffer {
@@ -105,92 +191,3 @@ impl Task for PasswordHash {
 pub fn password_hash(buf: Buffer) -> AsyncTask<PasswordHash> {
   AsyncTask::new(PasswordHash { buf })
 }
-// for i in 0..cx.len() {
-//     let bin = to_bin(cx, i)?;
-//     hasher.update(&bin);
-// }
-// jswait(cx, async move {
-//     let mut output = [0; N];
-//     for _ in 1..N {
-//         hasher.finalize_xof().fill(&mut output);
-//         hasher.update(&output);
-//     }
-//     let mut output = [0; 16];
-//     hasher.finalize_xof().fill(&mut output);
-//     Ok(Box::<[u8]>::from(&output[..]))
-// })?
-// }
-
-// use image::EncodableLayout;
-// use thiserror::Error;
-// use tiny_skia::PremultipliedColorU8;
-// use usvg::TreeParsing;
-// use webp::Encoder;
-//
-//
-// #[derive(Error, Debug)]
-// pub enum Error {
-//   #[error("tiny_skia::Pixmap::new return None")]
-//   PIXMAP,
-//
-//   #[error("resvg::render return None")]
-//   RESVG,
-// }
-//
-// struct SvgWebp {
-//   svg: Buffer,
-//   quality: f32,
-// }
-//
-// impl Task for SvgWebp {
-//   type Output = Buffer;
-//   type JsValue = Buffer;
-//
-//   fn compute(&mut self) -> Result<Self::Output> {
-//     Ok(_svg_webp(&self.svg, self.quality)?)
-//   }
-//
-//   fn resolve(&mut self, _: Env, output: Self::Output) -> Result<Self::JsValue> {
-//     Ok(output)
-//   }
-// }
-//
-// fn _svg_webp(svg: &Buffer, quality: f32) -> anyhow::Result<Buffer> {
-//   let opt = usvg::Options::default();
-//   let rtree = usvg::Tree::from_data(svg.as_ref(), &opt)?;
-//   let pixmap_size = rtree.size.to_screen_size();
-//   let width = pixmap_size.width();
-//   let height = pixmap_size.height();
-//   if let Some(mut pixmap) = tiny_skia::Pixmap::new(width, height) {
-//     // 去除透明度（默认是黑底，255-颜色会改为用白底）
-//     for px in pixmap.pixels_mut() {
-//       *px = PremultipliedColorU8::from_rgba(255 - px.red(), 255 - px.green(), 255 - px.blue(), 255)
-//         .unwrap();
-//     }
-//     if resvg::render(
-//       &rtree,
-//       resvg::FitTo::Original,
-//       tiny_skia::Transform::default(),
-//       pixmap.as_mut(),
-//     )
-//     .is_some()
-//     {
-//       let img = pixmap.data();
-//
-//       let encoder = Encoder::from_rgba(img, width, height);
-//       let encoded_webp = encoder.encode(quality);
-//       let b = encoded_webp.as_bytes();
-//       return Ok(b.into());
-//     } else {
-//       return Err(Error::RESVG)?;
-//     }
-//   }
-//   Err(Error::PIXMAP)?
-// }
-//
-// #[allow(dead_code)]
-// #[napi]
-// fn svg_webp(svg: Buffer, quality: f64) -> AsyncTask<SvgWebp> {
-//   let quality = quality as f32;
-//   AsyncTask::new(SvgWebp { svg, quality })
-// }
