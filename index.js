@@ -1,8 +1,6 @@
 import { createRequire } from "module";
-import { dirname } from "path";
-const __dirname = dirname(
-new URL(decodeURIComponent(import.meta.url)).pathname,
-);
+import { dirname, sep } from "path";
+const __dirname = dirname(decodeURIComponent(import.meta.url.slice(sep=='/'? 7:8)));
 const require = createRequire(import.meta.url);/* tslint:disable */
 /* eslint-disable */
 /* prettier-ignore */
@@ -280,6 +278,7 @@ autoeLi.passwordHash;
 autoeLi.cookieEncode;
 autoeLi.xxh64;
 autoeLi.xxh32;
+autoeLi.xxh3B36;
 
 nativeBinding.z85Dump = (s) => _z85Dump(autoe(s));
 nativeBinding.zipU64 = (...args) => _zipU64(args);
@@ -288,6 +287,8 @@ export const cookieDecode = nativeBinding.cookieDecode;
 export const cookieEncode = nativeBinding.cookieEncode;
 export const xxh64 = nativeBinding.xxh64;
 export const xxh32 = nativeBinding.xxh32;
+export const xxh3B36 = nativeBinding.xxh3B36;
+export const ipBin = nativeBinding.ipBin;
 export const randomBytes = nativeBinding.randomBytes;
 export const z85Dump = nativeBinding.z85Dump;
 export const z85Load = nativeBinding.z85Load;

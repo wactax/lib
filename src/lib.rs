@@ -1,4 +1,7 @@
-use std::hash::{BuildHasher, Hasher};
+use std::{
+  hash::{BuildHasher, Hasher},
+  net::IpAddr,
+};
 
 use anyhow::Result;
 use napi::{
@@ -40,23 +43,43 @@ pub fn xxh32(li: Buffer) -> Buffer {
   h.digest().to_le_bytes().into()
 }
 
-// xxh3_b36 |cx| {
-//   let li = args_bin_li(cx,0)?;
-//   let mut h64 = XXHASHER.build_hasher();
-//   for i in li {
-//     h64.update(i.as_ref());
-//   }
-//   let r = h64.finish().to_le_bytes();
-//   let mut n = 0;
-//   while n < 6 {
-//     if r[n]!=0 {
-//       break;
-//     }
-//     n+=1;
-//   }
-//   base_x::encode("123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz",&r[n..])
-// }
-//
+#[napi]
+pub fn xxh3_b36(li: Buffer) -> Buffer {
+  let mut h64 = XXHASHER.build_hasher();
+  h64.update(&li);
+  let r = h64.finish().to_le_bytes();
+  let mut n = 0;
+  while n < 6 {
+    if r[n] != 0 {
+      break;
+    }
+    n += 1;
+  }
+  base_x::encode(
+    "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz",
+    &r[n..],
+  )
+  .into()
+}
+
+#[napi]
+pub fn ip_bin(ip: String) -> Result<Buffer> {
+  let ip: IpAddr = ip.parse()?;
+  Ok(match ip {
+    IpAddr::V4(ip) => {
+      let o = ip.octets();
+      [o[0], o[1], o[2], o[3]].into()
+    }
+    IpAddr::V6(ip) => {
+      let o = ip.octets();
+      [
+        o[0], o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8], o[9], o[10], o[11], o[12], o[13],
+        o[14], o[15],
+      ]
+      .into()
+    }
+  })
+}
 // ip_bin |cx| {
 //   let ip = as_str(cx,0)?;
 //   let ip:IpAddr = ok!(cx,ip.parse());
