@@ -5,5 +5,10 @@ cd $DIR
 set -ex
 
 yarn run build:debug
-RUST_BACKTRACE=short yarn test 2>out.txt
-glow -s dracula out.txt
+
+catout() {
+  glow -s dracula out.txt
+}
+RUST_BACKTRACE=short yarn test 2>out.txt || (catout && exit 1)
+
+catout
