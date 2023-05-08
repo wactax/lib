@@ -80,44 +80,35 @@ pub fn ip_bin(ip: String) -> Result<Buffer> {
     }
   })
 }
-// ip_bin |cx| {
-//   let ip = as_str(cx,0)?;
-//   let ip:IpAddr = ok!(cx,ip.parse());
-//   match ip{
-//     IpAddr::V4(ip) => {
-//       let o = ip.octets();
-//       Box::<[u8]>::from([o[0], o[1], o[2], o[3]])
-//     }
-//     IpAddr::V6(ip) => {
-//       let o = ip.octets();
-//       Box::<[u8]>::from([
-//         o[0], o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8], o[9], o[10], o[11], o[12], o[13],
-//         o[14], o[15],
-//       ])
-//     }
-//   }
-// }
-//
-// tld |cx| {
-//   let mut domain = &to_bin(cx, 0)?[..];
-//   if let Some(d) = psl::domain(domain){
-//     let bytes = d.suffix().as_bytes();
-//     let len = bytes.len();
-//     if len > 0 && !is_ascii_digit(bytes) {
-//       let mut n = domain.len()-len;
-//       n = n.saturating_sub(1);
-//       while n > 0 {
-//         let t=n-1;
-//         if domain[t] == b'.' {
-//           break;
-//         }
-//         n=t;
-//       }
-//       domain = &domain[n..]
-//     }
-//   }
-//   unsafe { String::from_utf8_unchecked(domain.into()) }
-// }
+
+pub fn is_ascii_digit(bytes: &[u8]) -> bool {
+  bytes.iter().all(|i| {
+    let i = *i;
+    i.is_ascii_digit()
+  })
+}
+
+#[napi]
+pub fn tld(domain: Buffer) -> String {
+  let mut domain = &domain[..];
+  if let Some(d) = psl::domain(domain) {
+    let bytes = d.suffix().as_bytes();
+    let len = bytes.len();
+    if len > 0 && !is_ascii_digit(bytes) {
+      let mut n = domain.len() - len;
+      n = n.saturating_sub(1);
+      while n > 0 {
+        let t = n - 1;
+        if domain[t] == b'.' {
+          break;
+        }
+        n = t;
+      }
+      domain = &domain[n..]
+    }
+  }
+  unsafe { String::from_utf8_unchecked(domain.into()) }
+}
 
 #[napi]
 pub fn random_bytes(n: u32) -> Buffer {

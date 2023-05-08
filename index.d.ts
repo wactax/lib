@@ -9,6 +9,7 @@ export function xxh64(li: Buffer): Buffer
 export function xxh32(li: Buffer): Buffer
 export function xxh3B36(li: Buffer): Buffer
 export function ipBin(ip: string): Buffer
+export function tld(domain: Buffer): string
 export function randomBytes(n: number): Buffer
 export function z85Dump(bin: Buffer): Buffer
 export function z85Load(bin: Buffer): Buffer

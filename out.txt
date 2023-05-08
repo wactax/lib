@@ -1,3 +1,9 @@
+`tld( "x.x.tax" )` 
+  → `x.tax`
+
+`ipBin( "127.0.0.1" )` 
+  → `<Buffer 7f 00 00 01>`
+
 `xxh32( "xx" )` 
   → `<Buffer 9c 28 d0 08>`
 

@@ -11,6 +11,10 @@ I = await import('../index.js')
 
 T = avat I
 
+T.tld('x.x.tax')('x.tax')
+
+T.ipBin('127.0.0.1')(Buffer.from '7f000001','hex')
+
 T.xxh32('xx')(Buffer.from '9c28d008','hex')
 
 T.xxh64('xx')(Buffer.from 'bd1e84f06c741aa7','hex')
