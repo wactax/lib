@@ -14,6 +14,8 @@ import util from 'util';
 
 I = (await import('../index.js'));
 
+console.log('>>>', (await I.passwordHash('1', 'b')));
+
 T = avat(I);
 
 li = [1, 2, 3, 4];
