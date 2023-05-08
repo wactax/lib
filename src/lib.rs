@@ -1,9 +1,22 @@
 use anyhow::Result;
-use base64_simd::URL_SAFE_NO_PAD as BASE64;
 use napi::{bindgen_prelude::Buffer, JsNumber};
+use ordered_varint::Variable;
 
 #[macro_use]
 extern crate napi_derive;
+
+#[napi]
+pub fn u64_bin(n: JsNumber) -> Result<Buffer> {
+  let n: i64 = n.try_into()?;
+  let n = n as u64;
+  Ok(n.to_variable_vec()?.into())
+}
+
+#[napi]
+pub fn bin_u64(n: Buffer) -> Result<i64> {
+  let n = u64::decode_variable(&*n)? as i64;
+  Ok(n)
+}
 
 #[napi]
 pub fn zip_u64(li: Vec<JsNumber>) -> Result<Buffer> {
@@ -21,11 +34,6 @@ pub fn unzip_u64(bin: Buffer) -> Vec<i64> {
     Ok(r) => r.into_iter().map(|i| i as i64).collect(),
     Err(_) => vec![],
   }
-}
-
-#[napi]
-pub fn unb64(bin: Buffer) -> Result<Buffer> {
-  BASE64.decode_to_vec(&bin)?.into()
 }
 
 // use image::EncodableLayout;
