@@ -21,7 +21,7 @@ T.xxh64('xx')(Buffer.from 'bd1e84f06c741aa7','hex')
 
 bin = Buffer.from '2323233165','hex'
 
-T.xxh3B36(bin) Buffer.from '37616b78454b6e4165676b','hex'
+T.xxh3B36(bin) '7akxEKnAegk'
 
 z85 = 'S9l+a]'
 
