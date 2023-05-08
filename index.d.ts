@@ -6,6 +6,7 @@
 export function cookieDecode(s: string): Buffer
 export function cookieEncode(li: Buffer): string
 export function xxh64(li: Buffer): Buffer
+export function xxh32(li: Buffer): Buffer
 export function randomBytes(n: number): Buffer
 export function z85Dump(bin: Buffer): Buffer
 export function z85Load(bin: Buffer): Buffer

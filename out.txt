@@ -1,3 +1,9 @@
+`xxh32( "xx" )` 
+  → `<Buffer 9c 28 d0 08>`
+
+`xxh64( "xx" )` 
+  → `<Buffer bd 1e 84 f0 6c 74 1a a7>`
+
 `cookieEncode( <Buffer 23 23 23 31 65> )` 
   → `S9l+a]`
 

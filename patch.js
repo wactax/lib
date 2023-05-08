@@ -18,6 +18,8 @@ const autoeLi = new Proxy(
 
 autoeLi.passwordHash;
 autoeLi.cookieEncode;
+autoeLi.xxh64;
+autoeLi.xxh32;
 
 nativeBinding.z85Dump = (s) => _z85Dump(autoe(s));
 nativeBinding.zipU64 = (...args) => _zipU64(args);

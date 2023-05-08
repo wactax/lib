@@ -278,6 +278,8 @@ const autoeLi = new Proxy(
 
 autoeLi.passwordHash;
 autoeLi.cookieEncode;
+autoeLi.xxh64;
+autoeLi.xxh32;
 
 nativeBinding.z85Dump = (s) => _z85Dump(autoe(s));
 nativeBinding.zipU64 = (...args) => _zipU64(args);
@@ -285,6 +287,7 @@ nativeBinding.zipU64 = (...args) => _zipU64(args);
 export const cookieDecode = nativeBinding.cookieDecode;
 export const cookieEncode = nativeBinding.cookieEncode;
 export const xxh64 = nativeBinding.xxh64;
+export const xxh32 = nativeBinding.xxh32;
 export const randomBytes = nativeBinding.randomBytes;
 export const z85Dump = nativeBinding.z85Dump;
 export const z85Load = nativeBinding.z85Load;

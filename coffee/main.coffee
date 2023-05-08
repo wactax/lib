@@ -9,8 +9,11 @@
 
 I = await import('../index.js')
 
-
 T = avat I
+
+T.xxh32('xx')(Buffer.from '9c28d008','hex')
+
+T.xxh64('xx')(Buffer.from 'bd1e84f06c741aa7','hex')
 
 bin = Buffer.from '2323233165','hex'
 z85 = 'S9l+a]'

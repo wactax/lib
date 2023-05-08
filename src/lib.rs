@@ -6,7 +6,7 @@ use napi::{
   Env, JsNumber, Task,
 };
 use ordered_varint::Variable;
-use xxhash_rust::xxh3::Xxh3Builder;
+use xxhash_rust::{xxh3::Xxh3Builder, xxh32::Xxh32};
 
 #[macro_use]
 extern crate napi_derive;
@@ -33,24 +33,13 @@ pub fn xxh64(li: Buffer) -> Buffer {
   h64.finish().to_le_bytes().into()
 }
 
-// xxh64 |cx| {
-//   let li = args_bin_li(cx,0)?;
-//   let mut h64 = XXHASHER.build_hasher();
-//   for i in li {
-//     h64.update(i.as_ref());
-//   }
-//   h64.finish().to_le_bytes()
-// }
-//
-// xxh32 |cx| {
-//   let li = args_bin_li(cx,0)?;
-//   let mut h = Xxh32::new(0);
-//   for i in li {
-//     h.update(i.as_ref());
-//   }
-//   h.digest().to_le_bytes()
-// }
-//
+#[napi]
+pub fn xxh32(li: Buffer) -> Buffer {
+  let mut h = Xxh32::new(0);
+  h.update(&li);
+  h.digest().to_le_bytes().into()
+}
+
 // xxh3_b36 |cx| {
 //   let li = args_bin_li(cx,0)?;
 //   let mut h64 = XXHASHER.build_hasher();
