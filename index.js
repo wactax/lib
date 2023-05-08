@@ -269,8 +269,7 @@ const autoeLi = new Proxy(
 		get: (_, name) => {
 			const func = nativeBinding[name];
 			nativeBinding[name] = (...args) => {
-				console.warn(args);
-				return func(u8merge(args.map(autoe)));
+				return func(u8merge(...args.map(autoe)));
 			};
 			return;
 		},

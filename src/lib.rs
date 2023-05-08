@@ -13,14 +13,11 @@ const COOKIE_SAFE_CHAR: &str =
 
 #[napi]
 pub fn cookie_decode(s: String) -> Result<Buffer> {
-  dbg!(&s);
   Ok(base_x::decode(COOKIE_SAFE_CHAR, &s)?.into())
 }
 
 #[napi]
 pub fn cookie_encode(li: Buffer) -> String {
-  let li = li.to_vec();
-  dbg!(base_x::encode(COOKIE_SAFE_CHAR, &li), &li);
   base_x::encode(COOKIE_SAFE_CHAR, &li)
 }
 

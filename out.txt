@@ -1,10 +1,27 @@
-[src/lib.rs:16] &s = "!"
-<< <Buffer 00>
-[src/lib.rs:23] base_x::encode(COOKIE_SAFE_CHAR, &li) = "!"
-[src/lib.rs:23] &li = [
-    0,
-]
-[ <Buffer 23 23 23 31 65> ]
 `cookieEncode( <Buffer 23 23 23 31 65> )` 
-  → `!`
+  → `S9l+a]`
+
+`cookieDecode( "S9l+a]" )` 
+  → `<Buffer 23 23 23 31 65>`
+
+`z85Dump( "c" )` 
+  → `<Buffer 23 23 23 31 65>`
+
+`z85Load( <Buffer 23 23 23 31 65> )` 
+  → `<Buffer 63>`
+
+`zipU64( 1,2,3,4 )` 
+  → `<Buffer 01 02 03 04>`
+
+`unzipU64( <Buffer 01 02 03 04 b1 a8 03> )` 
+  → `[ 1, 2, 3, 4, 54321 ]`
+
+`u64Bin( 54321 )` 
+  → `<Buffer 20 d4 31>`
+
+`binU64( <Buffer 20 d4 31> )` 
+  → `54321`
+
+`await passwordHash( "1","b" )` 
+  → `<Buffer be 2e 7e 76 3d 74 cf 76 a0 a9 63 2e 70 1c 62 62>`
 

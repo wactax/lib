@@ -1,5 +1,5 @@
 #!/usr/bin/env -S node --loader=@w5/jsext --trace-uncaught --expose-gc --unhandled-rejections=strict --experimental-import-meta-resolve
-var I, T, bin;
+var I, T, bin, li, n, s, z85;
 
 import avat from '@w5/avat';
 
@@ -22,31 +22,32 @@ T = avat(I);
 
 bin = Buffer.from('2323233165', 'hex');
 
-T.cookieEncode(bin)('!');
+z85 = 'S9l+a]';
 
-console.log('<<', I.cookieDecode('!'));
+T.cookieEncode(bin)(z85);
 
-// s = 'c'
+T.cookieDecode(z85)(bin);
 
-// T.z85Dump(
-//   s
-// ) bin
+s = 'c';
 
-// T.z85Load(bin) Buffer.from s,'utf8'
+T.z85Dump(s)(bin);
 
-// li = [1,2,3,4]
+T.z85Load(bin)(Buffer.from(s, 'utf8'));
 
-// T.zipU64(...li)(Buffer.from li)
+li = [1, 2, 3, 4];
 
-// n = 54321
-// li.push n
+T.zipU64(...li)(Buffer.from(li));
 
-// T.unzipU64(I.zipU64(...li))(li)
+n = 54321;
 
-// bin = Buffer.from [0x20, 0xd4, 0x31]
-// T.u64Bin(n)(bin)
+li.push(n);
 
-// T.binU64(bin)(n)
+T.unzipU64(I.zipU64(...li))(li);
 
-// T.passwordHash('1','b')(Buffer.from('be2e7e763d74cf76a0a9632e701c6262', 'hex'))
+bin = Buffer.from([0x20, 0xd4, 0x31]);
 
+T.u64Bin(n)(bin);
+
+T.binU64(bin)(n);
+
+T.passwordHash('1', 'b')(Buffer.from('be2e7e763d74cf76a0a9632e701c6262', 'hex'));
