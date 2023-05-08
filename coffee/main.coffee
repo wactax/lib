@@ -28,13 +28,11 @@ z85 = 'S9l+a]'
 T.cookieEncode(bin) z85
 T.cookieDecode(z85) bin
 
-s = 'c'
+z85_encoded = 'bo[A/###1g'
 
-T.z85Dump(
-  s
-) bin
+T.z85Dump(bin) z85_encoded
 
-T.z85Load(bin) Buffer.from s,'utf8'
+T.z85Load(z85_encoded) bin
 
 li = [1,2,3,4]
 

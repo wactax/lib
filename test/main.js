@@ -1,5 +1,5 @@
 #!/usr/bin/env -S node --loader=@w5/jsext --trace-uncaught --expose-gc --unhandled-rejections=strict --experimental-import-meta-resolve
-var I, T, bin, li, n, s, z85;
+var I, T, bin, li, n, z85, z85_encoded;
 
 import avat from '@w5/avat';
 
@@ -38,11 +38,11 @@ T.cookieEncode(bin)(z85);
 
 T.cookieDecode(z85)(bin);
 
-s = 'c';
+z85_encoded = 'bo[A/###1g';
 
-T.z85Dump(s)(bin);
+T.z85Dump(bin)(z85_encoded);
 
-T.z85Load(bin)(Buffer.from(s, 'utf8'));
+T.z85Load(z85_encoded)(bin);
 
 li = [1, 2, 3, 4];
 
