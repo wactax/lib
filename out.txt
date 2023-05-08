@@ -10,6 +10,6 @@
 `binU64( <Buffer 20 d4 31> )` 
   → `54321`
 
-`await passwordHash( 1,b )` 
+`await passwordHash( "1","b" )` 
   → `<Buffer be 2e 7e 76 3d 74 cf 76 a0 a9 63 2e 70 1c 62 62>`
 
