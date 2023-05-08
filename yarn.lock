@@ -172,12 +172,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5/avat@npm:^0.0.2":
-  version: 0.0.2
-  resolution: "@w5/avat@npm:0.0.2"
+"@w5/avat@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "@w5/avat@npm:0.0.6"
   dependencies:
     ava: ^5.2.0
-  checksum: d3ddb4750b25fa90b3cc0ef4b99ecf96b1999b237fce0661a6588b742fe3476a11f0e489de8f170315bf0c13184d9be5e4115b72602ba6f820773b1d8331fede
+  checksum: 0c810a179c933c26d177ca632749052a9c5ba201b5b1f373057c50429b3921c4a8ee329e41b424893feab5e15bf93560613c1db24ff0724bdaccdc4dd1173e3c
   languageName: node
   linkType: hard
 
@@ -234,11 +234,12 @@ __metadata:
   resolution: "@w5/lib@workspace:."
   dependencies:
     "@napi-rs/cli": ^2.15.2
-    "@w5/avat": ^0.0.2
+    "@w5/avat": ^0.0.6
     "@w5/coffee_plus": ^0.0.13
     "@w5/loader": ^0.0.3
     "@w5/mdt": ^0.0.16
     "@w5/read": ^0.0.1
+    "@w5/u8": ^0.0.1
     "@w5/uridir": ^0.0.1
     "@w5/utf8": ^0.0.3
     "@w5/write": ^0.0.1
@@ -281,6 +282,13 @@ __metadata:
   version: 0.0.1
   resolution: "@w5/read@npm:0.0.1"
   checksum: c1dd9997b5bcb3edf0c0db1f5bf1e545151b40a8e1517176959300a96ff1b8ff4e8b399efb1daa100df2ebf091ec87d1438c9f9a35c3190099fabd907f6f7bcf
+  languageName: node
+  linkType: hard
+
+"@w5/u8@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@w5/u8@npm:0.0.1"
+  checksum: b2870a323364184dd498dda38d5b221666b2076686ddf94237b025a85cf837bc43b8c650b8a22b55b0b044cb6ebd4ea4302c625f8e50b82f4b52f8e53c930397
   languageName: node
   linkType: hard
 

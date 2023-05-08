@@ -18,6 +18,8 @@ T = avat(I);
 
 bin = Buffer.from('2323233165', 'hex');
 
+console.log(I.cookieEncode(bin));
+
 s = 'c';
 
 T.z85Dump(s)(bin);

@@ -7,9 +7,12 @@
 
 I = await import('../index.js')
 
+
 T = avat I
 
 bin = Buffer.from '2323233165','hex'
+
+console.log I.cookieEncode(bin)
 
 s = 'c'
 

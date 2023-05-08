@@ -8,6 +8,27 @@ use ordered_varint::Variable;
 #[macro_use]
 extern crate napi_derive;
 
+const COOKIE_SAFE_CHAR: &str =
+  "!#$%&'()*+-./0123456789:<>?@ABDEFGHIJKLMNQRSTUVXYZ[]^_`abdefghijklmnqrstuvxyz{|}~";
+
+#[napi]
+pub fn cookie_decode(s: String) -> Result<Buffer> {
+  Ok(base_x::decode(COOKIE_SAFE_CHAR, &s)?.into())
+}
+
+#[napi]
+pub fn cookie_encode(li: Buffer) -> String {
+  base_x::encode(COOKIE_SAFE_CHAR, &li)
+}
+
+#[napi]
+pub fn random_bytes(n: u32) -> Buffer {
+  (0..n)
+    .map(|_| rand::random::<u8>())
+    .collect::<Vec<u8>>()
+    .into()
+}
+
 #[napi]
 pub fn z85_dump(bin: Buffer) -> Buffer {
   z85::encode(bin).into()
@@ -49,12 +70,10 @@ pub fn unzip_u64(bin: Buffer) -> Vec<i64> {
   }
 }
 
-pub fn _password_hash(li: &Vec<Buffer>) -> Buffer {
+pub fn _password_hash(buf: &Buffer) -> Buffer {
   const N: usize = 512;
   let mut hasher = blake3::Hasher::new();
-  for i in li {
-    hasher.update(&i);
-  }
+  hasher.update(&buf);
   let mut output = [0; N];
   for _ in 1..N {
     hasher.finalize_xof().fill(&mut output);
@@ -66,7 +85,7 @@ pub fn _password_hash(li: &Vec<Buffer>) -> Buffer {
 }
 
 pub struct PasswordHash {
-  li: Vec<Buffer>,
+  buf: Buffer,
 }
 
 impl Task for PasswordHash {
@@ -74,7 +93,7 @@ impl Task for PasswordHash {
   type JsValue = Buffer;
 
   fn compute(&mut self) -> napi::Result<Self::Output> {
-    Ok(_password_hash(&self.li))
+    Ok(_password_hash(&self.buf))
   }
 
   fn resolve(&mut self, _: Env, output: Self::Output) -> napi::Result<Self::JsValue> {
@@ -83,8 +102,8 @@ impl Task for PasswordHash {
 }
 
 #[napi]
-pub fn password_hash(li: Vec<Buffer>) -> AsyncTask<PasswordHash> {
-  AsyncTask::new(PasswordHash { li })
+pub fn password_hash(buf: Buffer) -> AsyncTask<PasswordHash> {
+  AsyncTask::new(PasswordHash { buf })
 }
 // for i in 0..cx.len() {
 //     let bin = to_bin(cx, i)?;

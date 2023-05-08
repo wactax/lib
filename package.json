@@ -61,6 +61,7 @@
   },
   "packageManager": "yarn@3.5.1",
   "dependencies": {
+    "@w5/u8": "^0.0.1",
     "@w5/utf8": "^0.0.3"
   }
 }

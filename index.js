@@ -259,19 +259,32 @@ if (!nativeBinding) {
 
 ;
 import autoe from "@w5/utf8/autoe.js";
+import { u8merge } from "@w5/u8";
 
-const {
-	z85Dump: _z85Dump,
-	zipU64: _zipU64,
-	passwordHash: _passwordHash,
-} = nativeBinding;
+const { z85Dump: _z85Dump, zipU64: _zipU64 } = nativeBinding;
 
-nativeBinding.zipU64 = (...args) => _zipU64(args);
+const autoeLi = new Proxy(
+	{},
+	{
+		get: (_, name) => {
+			const func = nativeBinding[name];
+			nativeBinding[name] = (...args) => {
+				return func(u8merge(args.map(autoe)));
+			};
+			return;
+		},
+	},
+);
 
-nativeBinding.passwordHash = (...args) => _passwordHash(args.map(autoe));
+autoeLi.passwordHash;
+autoeLi.cookieEncode;
 
 nativeBinding.z85Dump = (s) => _z85Dump(autoe(s));
+nativeBinding.zipU64 = (...args) => _zipU64(args);
 
+export const cookieDecode = nativeBinding.cookieDecode;
+export const cookieEncode = nativeBinding.cookieEncode;
+export const randomBytes = nativeBinding.randomBytes;
 export const z85Dump = nativeBinding.z85Dump;
 export const z85Load = nativeBinding.z85Load;
 export const u64Bin = nativeBinding.u64Bin;
