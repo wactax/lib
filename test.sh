@@ -5,5 +5,5 @@ cd $DIR
 set -ex
 
 rm -rf test
-bunx cep -w -c coffee -o test -e mjs
+bunx cep -w -c coffee -o test
 ./run.sh
