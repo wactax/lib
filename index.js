@@ -252,10 +252,11 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { u64Bin, binU64, zipU64, unzipU64 } = nativeBinding
+const { u64Bin, binU64, zipU64, unzipU64, passwordHash } = nativeBinding
 
 module.exports.u64Bin = u64Bin
 module.exports.binU64 = binU64
 module.exports.zipU64 = zipU64
-module.exports.unzipU64 = unzipU64;
+module.exports.unzipU64 = unzipU64
+module.exports.passwordHash = passwordHash;
 module.exports.zipU64 = (...args) => zipU64(args);

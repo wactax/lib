@@ -7,3 +7,4 @@ export function u64Bin(n: number): Buffer
 export function binU64(n: Buffer): number
 export function zipU64(li: Array<number>): Buffer
 export function unzipU64(bin: Buffer): Array<number>
+export function passwordHash(li: Array<Buffer>): Promise<unknown>

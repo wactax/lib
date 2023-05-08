@@ -1,5 +1,8 @@
 use anyhow::Result;
-use napi::{bindgen_prelude::Buffer, JsNumber};
+use napi::{
+  bindgen_prelude::{AsyncTask, Buffer},
+  Env, JsNumber, Task,
+};
 use ordered_varint::Variable;
 
 #[macro_use]
@@ -35,6 +38,59 @@ pub fn unzip_u64(bin: Buffer) -> Vec<i64> {
     Err(_) => vec![],
   }
 }
+
+pub fn _password_hash(li: &Vec<Buffer>) -> Buffer {
+  const N: usize = 512;
+  let mut hasher = blake3::Hasher::new();
+  for i in li {
+    hasher.update(&i);
+  }
+  let mut output = [0; N];
+  for _ in 1..N {
+    hasher.finalize_xof().fill(&mut output);
+    hasher.update(&output);
+  }
+  let mut output = [0; 16];
+  hasher.finalize_xof().fill(&mut output);
+  output.into()
+}
+
+pub struct PasswordHash {
+  li: Vec<Buffer>,
+}
+
+impl Task for PasswordHash {
+  type Output = Buffer;
+  type JsValue = Buffer;
+
+  fn compute(&mut self) -> napi::Result<Self::Output> {
+    Ok(_password_hash(&self.li))
+  }
+
+  fn resolve(&mut self, _: Env, output: Self::Output) -> napi::Result<Self::JsValue> {
+    Ok(output)
+  }
+}
+
+#[napi]
+pub fn password_hash(li: Vec<Buffer>) -> AsyncTask<PasswordHash> {
+  AsyncTask::new(PasswordHash { li })
+}
+// for i in 0..cx.len() {
+//     let bin = to_bin(cx, i)?;
+//     hasher.update(&bin);
+// }
+// jswait(cx, async move {
+//     let mut output = [0; N];
+//     for _ in 1..N {
+//         hasher.finalize_xof().fill(&mut output);
+//         hasher.update(&output);
+//     }
+//     let mut output = [0; 16];
+//     hasher.finalize_xof().fill(&mut output);
+//     Ok(Box::<[u8]>::from(&output[..]))
+// })?
+// }
 
 // use image::EncodableLayout;
 // use thiserror::Error;
