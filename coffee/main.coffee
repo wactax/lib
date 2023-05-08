@@ -5,7 +5,8 @@
   @w5/uridir
   util
 
-T = avat await import('../index.js')
+I = await import('../index.js')
+T = avat I
 
 li = [1,2,3,4]
 

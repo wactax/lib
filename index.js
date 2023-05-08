@@ -257,5 +257,12 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-export const { u64Bin, binU64, zipU64, unzipU64, passwordHash } = nativeBinding;
-export const zipU64 = (...args) => zipU64(args);
+;
+const _zipU64 = nativeBinding.zipU64;
+nativeBinding.zipU64 = (...args) => _zipU64(args);
+
+export const u64Bin = nativeBinding.u64Bin;
+export const binU64 = nativeBinding.binU64;
+export const zipU64 = nativeBinding.zipU64;
+export const unzipU64 = nativeBinding.unzipU64;
+export const passwordHash = nativeBinding.passwordHash;

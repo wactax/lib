@@ -1,5 +1,5 @@
 #!/usr/bin/env -S node --loader=@w5/jsext --trace-uncaught --expose-gc --unhandled-rejections=strict --experimental-import-meta-resolve
-var T, bin, li, n;
+var I, T, bin, li, n;
 
 import avat from '@w5/avat';
 
@@ -12,7 +12,9 @@ import uridir from '@w5/uridir';
 
 import util from 'util';
 
-T = avat((await import('../index.js')));
+I = (await import('../index.js'));
+
+T = avat(I);
 
 li = [1, 2, 3, 4];
 
