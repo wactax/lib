@@ -1,6 +1,5 @@
 #!/usr/bin/env coffee
 
-
 > @w5/avat
   path > join dirname
   @w5/uridir

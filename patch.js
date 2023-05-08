@@ -1,1 +1,1 @@
-module.exports.zipU64 = (...args) => zipU64(args);
+export const zipU64 = (...args) => zipU64(args);

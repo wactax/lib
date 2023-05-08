@@ -258,4 +258,4 @@ if (!nativeBinding) {
 }
 
 export const { u64Bin, binU64, zipU64, unzipU64, passwordHash } = nativeBinding;
-module.exports.zipU64 = (...args) => zipU64(args);
+export const zipU64 = (...args) => zipU64(args);
