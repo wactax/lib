@@ -8,11 +8,9 @@ use napi::{
   bindgen_prelude::{AsyncTask, Buffer},
   Env, JsNumber, Task,
 };
+use napi_derive::napi;
 use ordered_varint::Variable;
 use xxhash_rust::{xxh3::Xxh3Builder, xxh32::Xxh32};
-
-#[macro_use]
-extern crate napi_derive;
 
 const XXHASHER: Xxh3Builder = Xxh3Builder::new();
 
