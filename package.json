@@ -28,7 +28,7 @@
   "license": "MIT",
   "devDependencies": {
     "@napi-rs/cli": "^2.15.2",
-    "@w5/avat": "^0.0.6",
+    "@w5/avat": "^0.0.8",
     "@w5/coffee_plus": "^0.0.13",
     "@w5/loader": "^0.0.3",
     "@w5/mdt": "^0.0.16",
