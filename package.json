@@ -1,7 +1,7 @@
 {
   "name": "@w5/lib",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "exports": {
     ".": {
       "import": "./index.js"
@@ -45,6 +45,9 @@
     "timeout": "3m",
     "require": [
       "esm"
+    ],
+    "files": [
+      "test/*.js"
     ]
   },
   "engines": {
