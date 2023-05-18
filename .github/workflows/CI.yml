@@ -141,6 +141,8 @@ jobs:
     name: Build FreeBSD
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: true
       - name: Build
         id: build
         uses: vmactions/freebsd-vm@v0
