@@ -159,7 +159,7 @@ pub fn unzip_u64(bin: Buffer) -> Vec<i64> {
 pub fn _password_hash(buf: &Buffer) -> Buffer {
   const N: usize = 512;
   let mut hasher = blake3::Hasher::new();
-  hasher.update(&buf);
+  hasher.update(buf);
   let mut output = [0; N];
   for _ in 1..N {
     hasher.finalize_xof().fill(&mut output);
